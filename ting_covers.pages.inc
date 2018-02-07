@@ -26,8 +26,8 @@ function ting_covers_objects() {
     else {
       // Mark the image for retrieval.
       $missing_images_local_ids[] = (object) array(
-        'localIdentifier' => $cover_info['local_id'],
-        'libraryCode' => $cover_info['owner_id'],
+        'faust' => $cover_info['local_id'],
+        //'libraryCode' => $cover_info['owner_id'],
       );
 
       // Image style to match later one.
@@ -40,11 +40,12 @@ function ting_covers_objects() {
     $service = new AdditionalInformationService(variable_get('addi_wsdl_url'), variable_get('addi_username'), variable_get('addi_group'), variable_get('addi_password'));
 
     // Local ids = Faust numbers. Library object identifiers can be confusing.
-    $additional_informations = $service->getByLocalIdentifier($missing_images_local_ids);
+    $additional_informations = $service->getByFaustNumber($missing_images_local_ids);
     foreach ($missing_images_local_ids as $local_id) {
       // Try to extract the image url from the result.
       $source_url = FALSE;
-      if (isset($additional_informations[$local_id->localIdentifier]) && $ai = $additional_informations[$local_id->localIdentifier]) {
+      $local_id->localIdentifier = $local_id->faust;
+      if (isset($additional_informations[$local_id->faust]) && $ai = $additional_informations[$local_id->localIdentifier]) {
         if ($ai->detailUrl) {
           $source_url = $ai->detailUrl;
         }
