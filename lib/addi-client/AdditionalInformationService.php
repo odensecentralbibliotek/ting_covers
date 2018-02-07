@@ -105,8 +105,9 @@ class AdditionalInformationService {
                       'authenticationPassword' => $this->password);
 
     // New moreinfo service.
+    $test = $this->wsdlUrl . '/moreinfo.wsdl';
     $client = new SoapClient($this->wsdlUrl . '/moreinfo.wsdl');
-
+    $client->__setLocation($this->wsdlUrl);
     // Record the start time, so we can calculate the difference, once
     // the addi service responds.
     $startTime = explode(' ', microtime());
