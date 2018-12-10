@@ -112,7 +112,6 @@ class AdditionalInformationService {
     $test = $this->wsdlUrl . '/?wsdl';
     $client = new SoapClient($this->wsdlUrl . '/?wsdl');
     $client->__setLocation($this->wsdlUrl ."/");
-    echo var_dump($client->__getFunctions());
     // Record the start time, so we can calculate the difference, once
     // the addi service responds.
     $startTime = explode(' ', microtime());
