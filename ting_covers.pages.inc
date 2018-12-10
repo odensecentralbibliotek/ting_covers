@@ -65,7 +65,7 @@ function ting_covers_objects() {
       if ($file = _ting_covers_pages_fetch_image(ting_covers_object_path($local_id->localIdentifier), $source_url)) {
         // Generate a path corresponding to the downloaded image, styled.
         $covers[] = array(
-          'local_id' => $local_id->localIdentifier,
+          'local_id' => explode(':',$local_id->localIdentifier)[1],
           'image_style' => $image_styles[$cover_info['local_id']],
           'url' => image_style_url($image_styles[$cover_info['local_id']], $file),
         );
