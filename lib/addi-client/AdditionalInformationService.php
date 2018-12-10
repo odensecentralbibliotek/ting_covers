@@ -55,7 +55,11 @@ class AdditionalInformationService {
     $response = $this->sendRequest($identifiers);
     return $this->extractAdditionalInformation('faust', $response);
   }
-
+  public function getByPid($pid) {
+    $identifiers = $this->collectIdentifiers('pid', $pid);
+    $response = $this->sendRequest($identifiers);
+    return $this->extractAdditionalInformation('pid', $response);
+  }
   /**
    * Get information by local ID and library code.
    *
@@ -105,9 +109,10 @@ class AdditionalInformationService {
                       'authenticationPassword' => $this->password);
 
     // New moreinfo service.
-    $test = $this->wsdlUrl . '/moreinfo.wsdl';
-    $client = new SoapClient($this->wsdlUrl . '/moreinfo.wsdl');
-    $client->__setLocation($this->wsdlUrl);
+    $test = $this->wsdlUrl . '/?wsdl';
+    $client = new SoapClient($this->wsdlUrl . '/?wsdl');
+    $client->__setLocation($this->wsdlUrl ."/");
+    echo var_dump($client->__getFunctions());
     // Record the start time, so we can calculate the difference, once
     // the addi service responds.
     $startTime = explode(' ', microtime());
