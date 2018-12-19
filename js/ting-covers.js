@@ -9,7 +9,7 @@
       return false;
     }
     return {
-      id : id,
+      local_id : id,
       image_style : image_style
     };
   };
