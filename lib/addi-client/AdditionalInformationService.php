@@ -55,6 +55,21 @@ class AdditionalInformationService {
     $response = $this->sendRequest($identifiers);
     return $this->extractAdditionalInformation('faust', $response);
   }
+  /**
+   * Get information by PID (supported in moreinfo version 2.7 and up).
+   *
+   * @param mixed $pid
+   *   Expects either a single FAUST number, or an array of them, for looking
+   *   up multiple materials at a time.
+   *
+   * @return array
+   *   Array of the images that were found.
+   */
+  public function getByPid($pid) {
+    $identifiers = $this->collectIdentifiers('pid', $pid);
+    $response = $this->sendRequest($identifiers);
+    return $this->extractAdditionalInformation('pid', $response);
+  }
 
   /**
    * Get information by local ID and library code.
