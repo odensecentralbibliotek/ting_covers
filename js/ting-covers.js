@@ -26,6 +26,7 @@
   Drupal.behaviors.tingCovers = {
     attach: function(context) {
       // Assemble information regarding covers.
+      debugger;
       var cover_data = [];
 
       // Extract cover information from the dom.
